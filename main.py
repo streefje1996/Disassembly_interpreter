@@ -4,7 +4,7 @@ from runner import execute_program
 from storage import storage
 from disassembly_parser import *
 
-test = ['reg.5', '=', '4', '/n', 'reg.5', 'jmp', 'JASMIJN', '/n', '+', '20', '/n', 'JASMIJN:', '/n', 'reg.5', '+', '2']
+test = ['reg.5', '=', '4', '/n', 'reg.0', '+', '20', '/n', 'JASMIJN:', '/n', 'reg.5', '+', 'reg.0']
 
 generated_tokens = generate_tokens(test)
 

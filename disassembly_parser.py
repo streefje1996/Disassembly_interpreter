@@ -23,6 +23,8 @@ def parse(tokens: List[token], line_number : int = 1) -> List[command]:
 	cmd = build_command(line_number, tokens[:here_is_new_line])
 	return [cmd] + parse(tokens[here_is_new_line:], line_number+1)
 
+
+
 # get_labels :: [commands] -> dict
 def get_labels(commands : List[command]) -> Dict[str, int]:
 	if len(commands) == 0:

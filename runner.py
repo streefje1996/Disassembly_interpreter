@@ -7,7 +7,7 @@ import copy
 def execute_command(cmd : command, state : program_state) -> program_state:
 	new_state = copy.deepcopy(state)
 	if (type(cmd) == operator_command):
-		if (cmd.other == storage_token):
+		if (type(cmd.other) == storage_token):
 			new_state.storage[cmd.reg_name.symbol] = cmd.cmd(state.storage[cmd.reg_name.symbol], state.storage[cmd.other.symbol])
 		else:
 			new_state.storage[cmd.reg_name.symbol] = cmd.cmd(state.storage[cmd.reg_name.symbol], cmd.other.value)
@@ -16,7 +16,6 @@ def execute_command(cmd : command, state : program_state) -> program_state:
 	new_state.execute_cmd_n += 1
 
 	if (type(cmd) == jump_command):
-		#TODO -> FIX AUTO INT     vvv
 		new_state.execute_cmd_n = cmd.cmd(cmd.label.symbol, state.label_booklet)
 	return new_state
 
