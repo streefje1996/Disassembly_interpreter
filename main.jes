@@ -1,0 +1,28 @@
+reg.5 = 4
+reg.0 = 20
+reg.4 = 6
+
+reg.5 - reg.4
+
+
+stack.store reg.5
+stack.store -9
+stack.store 10
+
+print stack
+
+1 == 1
+
+queue.store 8
+queue.store 9
+queue.store 10
+
+print 5555
+
+reg.0 < reg.5
+jmpt HIERO
+
+
+reg.5 + reg.0
+HIERO:
+reg.5 + reg.4
