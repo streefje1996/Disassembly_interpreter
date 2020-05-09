@@ -14,7 +14,7 @@ def where_is_new_line(tokens : List[token]) -> int:
 	head, *tail = tokens
 	return where_is_new_line(tail) + 1
 
-# parse :: [token] -> [command]
+# parse :: [token] -> int -> [command]
 def parse(tokens: List[token], line_number : int = 1) -> List[command]:
 	if (len(tokens) == 0):
 		return []

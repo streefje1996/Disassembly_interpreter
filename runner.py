@@ -3,11 +3,12 @@ from typing import List
 from program_state import program_state
 import copy
 
-def debug_deco(func):
+# debug_deco :: callable -> callable
+def debug_deco(func : Callable) -> Callable:
 	def inner(cmd : command, state : program_state):
 		print('command: ', cmd, ' resulted in the following program state:')
 		result = func(cmd, state)
-		print(state)
+		print(result)
 		return result
 	return inner
 

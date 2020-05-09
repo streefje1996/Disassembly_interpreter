@@ -4,13 +4,14 @@ reg.4 = 6
 
 reg.5 - reg.4
 
-jdfh38972
 
 stack.store reg.5
 stack.store -9
 stack.store 10
 
 print stack
+
+1 == 1
 
 queue.store 8
 queue.store 9

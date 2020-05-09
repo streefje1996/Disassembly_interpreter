@@ -2,8 +2,9 @@ from token import *
 from error import *
 from typing import List
 from typing import Union
+from typing import Callable
 
-
+# is_number :: str -> bool
 def is_number(char : str) -> bool:
 	return char in '-0987654321'
 
@@ -37,7 +38,8 @@ def get_token(command : str) -> Union[token, error]:
 	#error
 	return error(error_symbols.Invalid_token, command + ' is an invalid command')
 
-def print_tokens(func):
+# print_tokens :: callable -> callable
+def print_tokens(func : Callable) -> Callable:
 	def inner(cmd):
 		result = func(cmd)
 		print(result[0])

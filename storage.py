@@ -1,5 +1,6 @@
 from typing import List
 
+#register class
 class register:
 	def __init__(self, register_name : str, value : int):
 		self.name = register_name
@@ -8,6 +9,7 @@ class register:
 	def __str__(self):
 		return self.name + " : " + str(self.value)
 
+#predifined storage
 storage = {
 	#user vars
 	'stack'			: [],

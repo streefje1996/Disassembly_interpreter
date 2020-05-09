@@ -10,31 +10,31 @@ from error import *
 #operators
 #=================================================================
 # add :: register -> register + int -> register
-def add(lhs : register, rhs : Union[register, int]):
+def add(lhs : register, rhs : Union[register, int]) -> register:
 	if type(rhs) == register:
 		return register(lhs.name, lhs.value + rhs.value)
 	return register (lhs.name, lhs.value + rhs)
 
 # subtract :: register -> register + int -> register
-def subtract(lhs : register, rhs : Union[register, int]):
+def subtract(lhs : register, rhs : Union[register, int]) -> register:
 	if type(rhs) == register:
 		return register(lhs.name, lhs.value - rhs.value)
 	return register (lhs.name, lhs.value - rhs)
 
 # multiply :: register -> register + int -> register
-def multiply(lhs : register, rhs : Union[register, int]):
+def multiply(lhs : register, rhs : Union[register, int]) -> register:
 	if type(rhs) == register:
 		return register(lhs.name, lhs.value * rhs.value)
 	return register (lhs.name, lhs.value * rhs)
 
 # divide :: register -> register + int -> register
-def divide(lhs : register, rhs : Union[register, int]):
+def divide(lhs : register, rhs : Union[register, int]) -> register:
 	if type(rhs) == register:
 		return register(lhs.name, int(lhs.value / rhs.value))
 	return register (lhs.name, int(lhs.value / rhs))
 
 # assign :: register -> register + int -> register
-def assign(lhs : register, rhs : Union[register, int]):
+def assign(lhs : register, rhs : Union[register, int]) -> register:
 	if type(rhs) == register:
 		return register(lhs.name, rhs.value)
 	return register (lhs.name, rhs)
@@ -59,7 +59,6 @@ def not_equals(lhs : Union[register, int], rhs : Union[register, int]) -> bool:
 		return lhs.value != rhs
 	if type(rhs) == register:
 		return lhs != rhs.value
-	print (lhs != rhs)
 	return lhs != rhs
 
 # bigger :: register + int -> register + int -> bool
@@ -120,7 +119,7 @@ def pop_queue(queue : List[int], reg : register) -> Tuple[List[int],register]:
 	new_queue = pop_queue(tail, reg)
 	return ([new_queue[1].value] + new_queue[0], register(new_queue[1].name,head))
 
-
+# print_stack :: int + [int] -> [int]
 def print_stack(stack : Union[int, List[int]]) -> List[int]:
 	if len(stack) == 0:
 		return []
@@ -128,6 +127,7 @@ def print_stack(stack : Union[int, List[int]]) -> List[int]:
 	print(result[1].value)
 	return print_stack(result[0])
 
+# print_queue :: int + [int] -> [int]
 def print_queue(queue : Union[int, List[int]]) -> List[int]:
 	if len(queue) == 0:
 		return []
@@ -135,12 +135,12 @@ def print_queue(queue : Union[int, List[int]]) -> List[int]:
 	print(result[1].value)
 	return print_queue(result[0])
 
+# print_value :: int + [int] -> [int]
 def print_value(value : Union[int, List[int]]) -> List[int]:
 	print(value)
 	return []
 
 				
-
 #flow
 #=================================================================
 # jump :: str -> dict -> int + error
@@ -149,6 +149,7 @@ def jump(label : str, label_booklet : Dict[str, int]) -> Union[int, error]:
 		return label_booklet[label]
 	return error(error_symbols.Invalid_label)
 
+# jump_true :: str -> dict -> bool -> int -> int + error
 def jump_true(label : str, label_booklet : Dict[str, int], flag : bool, current : int) -> Union[int, error]:
 	if flag == True:
 		if label in label_booklet:
@@ -156,6 +157,7 @@ def jump_true(label : str, label_booklet : Dict[str, int], flag : bool, current 
 		return error(error_symbols.Invalid_label)
 	return current
 
+# jump_false :: str -> dict -> bool -> int -> int + error
 def jump_false(label : str, label_booklet : Dict[str, int], flag : bool, current : int) -> Union[int, error]:
 	if flag == False:
 		if label in label_booklet:
