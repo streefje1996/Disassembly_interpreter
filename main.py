@@ -1,24 +1,49 @@
 from lexur import generate_tokens
+from lexur import get_token
 from program_state import program_state
 from runner import execute_program
 from storage import storage
 from disassembly_parser import *
+from typing import TextIO
 
-test = ['reg.5', '=', '4', '/n', 'reg.0', '+', '20', '/n', 'JASMIJN:', '/n', 'reg.5', '+', 'reg.0']
+file = open('main.jes', 'r')
 
-generated_tokens = generate_tokens(test)
+raw_file = file.readlines()
 
-#print(generated_tokens[10])
+file.close()
 
-cmds = parse(generated_tokens)
+# read_file :: [str] -> [str]
+def read_file(raw : List[str]) -> List[str]:
+	if (len(raw) == 0):
+		return []
 
-booklet = get_labels(cmds)
+	head, *tail = raw
 
-state = program_state(storage,0,booklet)
+	new_list = head.split()
+	if (len(new_list) > 0):
+		return new_list + ['/n'] + read_file(tail)
+	return read_file(tail)
+	
+disassembly_file = read_file(raw_file)
 
-a = execute_program(cmds, state)
+#using map
+#generated_tokens = list(map(get_token, disassembly_file)) 
 
-print(a.storage['REG5'].value)
+#not using map
+generated_tokens = generate_tokens(disassembly_file)
+
+if not any(map(lambda a: True if type(a) == error else False, generated_tokens)):
+
+	cmds = parse(generated_tokens)
+
+	booklet = get_labels(cmds)
+
+	state = program_state(storage,0,booklet)
+
+	a = execute_program(cmds, state)
+
+else:
+	print('error in token')
 
 
 

@@ -14,7 +14,6 @@ def where_is_new_line(tokens : List[token]) -> int:
 	head, *tail = tokens
 	return where_is_new_line(tail) + 1
 
-
 # parse :: [token] -> [command]
 def parse(tokens: List[token], line_number : int = 1) -> List[command]:
 	if (len(tokens) == 0):
@@ -22,8 +21,6 @@ def parse(tokens: List[token], line_number : int = 1) -> List[command]:
 	here_is_new_line = where_is_new_line(tokens)
 	cmd = build_command(line_number, tokens[:here_is_new_line])
 	return [cmd] + parse(tokens[here_is_new_line:], line_number+1)
-
-
 
 # get_labels :: [commands] -> dict
 def get_labels(commands : List[command]) -> Dict[str, int]:
@@ -38,3 +35,4 @@ def get_labels(commands : List[command]) -> Dict[str, int]:
 		result[head.label.symbol] = head.ln - 1
 
 	return result
+

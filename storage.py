@@ -1,12 +1,17 @@
+from typing import List
+
 class register:
-	def __init__(self, register_name, value):
+	def __init__(self, register_name : str, value : int):
 		self.name = register_name
 		self.value = value
 
+	def __str__(self):
+		return self.name + " : " + str(self.value)
+
 storage = {
 	#user vars
-	'stack'			: [None] * 100,
-	'queue'			: [None] * 100,
+	'stack'			: [],
+	'queue'			: [],
 	'REG0'			: register('REG0', 0),
 	'REG1'			: register('REG1', 0),
 	'REG2'			: register('REG2', 0),
@@ -18,7 +23,7 @@ storage = {
 	'REG8'			: register('REG8', 0),
 	'REG9'			: register('REG9', 0),
 	#not user vars
-	'bool flag'		: bool,
-	'jump stack'	: [None] * 100
+	'bool flag'		: bool(False),
+	'jump stack'	: List[int]
 	}
 

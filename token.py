@@ -13,13 +13,21 @@ class value_token(token):
 		self.value = value
 
 	def __str__(self):
-		return "token symbol: " + self.symbol + " with value: " + str(self.value)
+		return token.__str__(self) + " with value: " + str(self.value)
 
 class operator_token(token):
 	def __init__(self, symbol):
 		token.__init__(self,symbol)
 
 class storage_token(token):
+	def __init__(self, symbol):
+		token.__init__(self,symbol)
+
+class compare_token(token):
+	def __init__(self, symbol):
+		token.__init__(self,symbol)
+
+class command_token(token):
 	def __init__(self, symbol):
 		token.__init__(self,symbol)
 
@@ -39,11 +47,24 @@ operator_tokens = {
 	'/': 'DIVIDE'
 	}
 
-storage_tokens = {
+compare_tokens = {
+	'==': 'EQUAL',
+	'!=': 'NOT_EQUAL',
+	'>': 'BIGGER',
+	'<': 'SMALLER'
+	}
+
+command_tokens = {
 	'stack.store': 'STACK_STORE',
 	'stack.get': 'STACK_GET',
+	'stack' : 'STACK',
 	'queue.store': 'QUEUE_STORE',
 	'queue.get': 'QUEUE_GET',
+	'queue' : 'QUEUE',
+	'print': 'PRINT'
+	}
+
+storage_tokens = {
 	'reg.0': 'REG0',
 	'reg.1': 'REG1',
 	'reg.2': 'REG2',
@@ -60,5 +81,5 @@ flow_tokens = {
 	'/n' : 'NEW_LINE',
 	'jmp' : 'JUMP',
 	'jmpt' : 'JUMP_TRUE',
-	'jmpf' : 'JUMP_FAlSE'
+	'jmpf' : 'JUMP_FALSE'
 	}
